@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Ashish</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        :root {
+            --bg: #f9fafb;
+            --text: #111827;
+            --card: #ffffff;
+            --accent: #2563eb;
+            --accent-dark: #1d4ed8;
+            --border: #e5e7eb;
+            --muted: #6b7280;
+            --glass: rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --text: #e2e8f0;
+            --card: #1e293b;
+            --accent: #60a5fa;
+            --accent-dark: #3b82f6;
+            --border: #334155;
+            --muted: #94a3b8;
+            --glass: rgba(30, 41, 59, 0.85);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        .container { max-width:1200px; margin:0 auto; padding:0 1.5rem;overflow : hidden ; }
+
+        header {
+            position: fixed;
+            top:0; left:0; right:0;
+            z-index: 1000;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.4rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .controls { display:flex; align-items:center; gap:1.6rem; }
+
+        .theme-toggle, .menu-btn {
+            background:none;
+            border:none;
+            font-size:1.5rem;
+            cursor:pointer;
+            color:var(--text);
+        }
+
+        .theme-toggle:hover, .menu-btn:hover { transform:scale(1.15); }
+
+        .menu-btn { display:none; }
+
+        main { padding-top:100px; min-height:calc(100vh - 180px); }
+
+        footer {
+            background:#020617;
+            color:#94a3b8;
+            text-align:center;
+            padding:4rem 0 2rem;
+        }
+
+        .social-links {
+            display:flex;
+            justify-content:center;
+            gap:2.2rem;
+            margin-bottom:1.8rem;
+        }
+
+        .social-links a {
+            color:#94a3b8;
+            font-size:1.9rem;
+            transition:color 0.3s;
+        }
+
+        .social-links a:hover { color:#60a5fa; }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display:none;
+            position:absolute;
+            top:80px; left:0; right:0;
+            background:var(--card);
+            border-bottom:1px solid var(--border);
+            box-shadow:0 10px 25px rgba(0,0,0,0.15);
+            z-index:999;
+            padding:1.5rem;
+        }
+
+        .mobile-menu.active { display:block; }
+
+        .mobile-menu a {
+            display:block;
+            padding:1.1rem 1.3rem;
+            font-size:1.15rem;
+            color:var(--text);
+            text-decoration:none;
+            border-radius:10px;
+            transition:all 0.2s;
+        }
+
+        .mobile-menu a:hover { background:rgba(37,99,235,0.1); color:var(--accent); }
+
+        @@media (max-width: 768px) {
+            .nav-links { display:none; }
+            .menu-btn { display:block; }
+            main { padding-top:90px; }
+            nav { height:70px; }
+            header { height:70px; }
+            .mobile-menu { top:70px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Ashish</div>
+
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/Home/About">About</a></li>
+                    <li><a href="/Home/Projects">Projects</a></li>
+                    <li><a href="/Home/Contact">Contact</a></li>
+                </ul>
+
+                <div class="controls">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <button class="menu-btn" id="menuBtn" aria-label="Menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/projects">Work</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+            </div>
+            <p>© 2026 Ashish Tiwari Built with .NETCORE</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        function setTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+
+        const saved = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(saved);
+
+        themeToggle.addEventListener('click', () => {
+            setTheme(body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        });
+
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('active');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

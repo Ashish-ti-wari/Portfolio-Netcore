@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Contact Me - Ashish";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .contact-form {
+        max-width: 680px;
+        margin: 0 auto 3rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.6rem;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 1rem 1.3rem;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--glass);
+        backdrop-filter: blur(8px);
+        font-size: 1.05rem;
+        color: var(--text);
+        transition: border-color 0.25s;
+    }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+        }
+
+    textarea {
+        resize: vertical;
+        min-height: 160px;
+    }
+
+    .contact-info {
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--muted);
+        margin: 2rem 0;
+    }
+
+    @@media (max-width: 480px) {
+        input, textarea {
+            font-size: 1rem;
+            padding: 0.95rem 1.2rem;
+        }
+    }
+</style>
+
+<section style="padding: 7rem 0 5rem;">
+    <div class="container">
+        <h1 style="font-size: 3.2rem; text-align: center; margin-bottom: 1rem;">Get in Touch</h1>
+        <p style="text-align: center; color: var(--muted); font-size: 1.18rem; max-width: 620px; margin: 0 auto 3.5rem;">
+            Have a project in mind? Want to discuss .NET, architecture, career or just say hi?<br>
+            Feel free to reach out — I'll get back to you as soon as possible.
+        </p>
+
+        <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required />
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Your Email" required />
+            </div>
+            <div class="form-group">
+                <input type="text" name="subject" placeholder="Subject" />
+            </div>
+            <div class="form-group">
+                <textarea name="message" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn" style="width:100%; padding:1.2rem; font-size:1.1rem;">
+                Send Message
+            </button>
+        </form>
+
+        <div class="contact-info">
+            or email me directly → <strong>ashish@example.com</strong>
+        </div>
+    </div>
+</section>
