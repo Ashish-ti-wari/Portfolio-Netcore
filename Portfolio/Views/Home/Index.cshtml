@@ -4,6 +4,16 @@
 }
 
 <style>
+    :root {
+        --glass: rgba(255, 255, 255, 0.07);
+        --border: rgba(255, 255, 255, 0.18);
+        --card: rgba(30, 41, 59, 0.4);
+        --muted: rgba(255,255,255,0.7);
+        --text: #e2e8f0;
+        --text-secondary: #cbd5e1;
+        --accent: #60a5fa;
+    }
+
     .hero {
         min-height: 90vh;
         background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
@@ -21,7 +31,6 @@
         border-right: 4px solid rgba(255,255,255,0.7);
         white-space: nowrap;
         overflow: hidden;
-       
         display: inline-block;
     }
 
@@ -38,71 +47,218 @@
         box-shadow: 0 10px 40px rgba(0,0,0,0.08);
     }
 
-  .grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-/* Force single column + smaller min on very narrow screens */
-@@media (max-width: 360px) {
     .grid-3 {
-        grid-template-columns: 1fr;           /* always 1 column */
-        gap: 1.6rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
     }
 
-    .glass-card {
-        min-width: 0;                         /* allow shrinking below content size */
-        overflow: hidden;                     /* prevent any internal overflow */
+    .btn-primary,
+    .btn-outline {
+        color: white;
+        border: 1px solid white;
+        padding: 0.8rem 1.8rem;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+        display: inline-block;
     }
-}
 
+    .btn-primary {
+        background: rgba(255,255,255,0.15);
+    }
+
+    .btn-primary:hover {
+        background: rgba(255,255,255,0.25);
+        transform: translateY(-2px);
+    }
+
+    .btn-outline {
+        background: transparent;
+    }
+
+    .btn-outline:hover {
+        background: rgba(255,255,255,0.12);
+    }
+
+    .hero-content {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: 3.8rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .hero-subtitle {
+        font-size: 1.35rem;
+        max-width: 680px;
+        margin: 1.8rem auto;
+        opacity: 0.92;
+        line-height: 1.5;
+    }
+
+    .about-card {
+        max-width: 780px;
+        margin: 0 auto;
+    }
+
+    .about-text {
+        font-size: 1.15rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+        font-size: 1.05rem;
+    }
+
+    .skill-card {
+        text-align: center;
+    }
+
+    .skill-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .project-tags {
+        margin-top: 1.2rem;
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        padding: 0.4rem 0.9rem;
+        background: rgba(37,99,235,0.1);
+        border-radius: 999px;
+        font-size: 0.9rem;
+        color: var(--accent);
+    }
+
+    .contact-form {
+        display: grid;
+        gap: 1.4rem;
+    }
+
+    .form-input,
+    .form-textarea {
+        padding: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--glass);
+        font-size: 1rem;
+        color: var(--text);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 140px;
+    }
+
+    .section-title {
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        font-weight: 700;
+    }
+
+    .actions {
+        margin-top: 2.8rem;
+        display: flex;
+        gap: 1.4rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* ────────────────────────────────────────────────
+       Responsive
+    ──────────────────────────────────────────────── */
     @@media (max-width: 768px) {
-        .hero { min-height: 80vh; padding: 6rem 0 4rem; }
-        .typing { font-size: 2rem; }
-        h1 { font-size: 2.8rem; }
-        .section { padding: 4rem 0; }
-    }
-     @@media (max-width: 325px) {
-   
-        .glass-card{
-            padding :1.5rem ;
+        .hero {
+            min-height: 80vh;
+            padding: 6rem 0 4rem;
+        }
+        .typing {
+            font-size: 2rem;
+        }
+        .hero-title {
+            font-size: 2.8rem;
+        }
+        .section {
+            padding: 4rem 0;
+        }
+        .section-title {
+            font-size: 2.4rem;
         }
     }
-    @@media (max-width : 468px){
+
+    @@media (max-width: 468px) {
         .typing {
-          font-size : 1.5rem ;
+            font-size: 1.5rem;
+        }
+        .actions {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+
+    @@media (max-width: 360px) {
+        .grid-3 {
+            grid-template-columns: 1fr;
+            gap: 1.6rem;
+        }
+        .glass-card {
+            min-width: 0;
+            overflow: hidden;
+        }
+    }
+
+    @@media (max-width: 325px) {
+        .glass-card {
+            padding: 1.5rem;
         }
     }
 </style>
 
 <section class="hero">
-    <div class="container">
-        <h1>Hi, I'm Ashish Tiwari</h1>
+    <div class="container hero-content">
+        <h1 class="hero-title">Hi, I'm Ashish Tiwari</h1>
         <div class="typing" id="typing"></div>
-        <p style="font-size:1.35rem; max-width:680px; margin:1.8rem auto; opacity:0.92;">
+        <p class="hero-subtitle">
             Full-stack .NET developer creating clean, scalable web applications from Delhi
         </p>
-        <div style="margin-top:2.8rem; display:flex; gap:1.4rem; justify-content:center; flex-wrap:wrap;">
-            <a href="/projects" class="btn">View Work</a>
-            <a href="#" class="btn btn-outline">Download CV</a>
+        <div class="actions">
+            <a href="/Home/Projects" class="btn-primary">View Work</a>
+            <a href="#" class="btn-outline">Download CV</a>
         </div>
     </div>
 </section>
 
 <section class="section" id="about">
     <div class="container">
-        <h2 style="font-size:2.8rem; text-align:center; margin-bottom:3rem;">About Me</h2>
-        <div class="glass-card" style="max-width:780px; margin:0 auto;">
-            <p style="font-size:1.15rem; margin-bottom:1.5rem;">
-                Passionate .NET developer with 3+ years of experience building enterprise-grade web applications.
+        <h2 class="section-title">About Me</h2>
+        <div class="glass-card about-card">
+            <p class="about-text">
+                I'm a passionate Full Stack Web Developer from Delhi, India.<br>
+                I really enjoy building clean, fast and user-friendly web applications —<br>
                 I enjoy solving real problems with clean architecture, modern C#, Blazor, EF Core and Azure.
             </p>
-            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1.5rem; margin-top:2rem;">
+            <div class="info-grid">
                 <div><strong>Location</strong><br>Delhi, India</div>
                 <div><strong>Focus</strong><br>ASP.NET Core • Blazor • Azure</div>
-                <div><strong>Currently</strong><br>Exploring .NET 9 & Minimal APIs</div>
+                <div><strong>Currently</strong><br>Exploring .NET 9, Minimal APIs, React & SQL</div>
             </div>
         </div>
     </div>
@@ -110,31 +266,31 @@
 
 <section class="section" id="skills" style="background:var(--card);">
     <div class="container">
-        <h2 style="font-size:2.8rem; text-align:center; margin-bottom:3rem;">Skills</h2>
+        <h2 class="section-title">Skills</h2>
         <div class="grid-3">
-            <div class="glass-card" style="text-align:center;">
-                <i class="fa-brands fa-microsoft" style="font-size:3.5rem; color:var(--accent); margin-bottom:1rem;"></i>
+            <div class="glass-card skill-card">
+                <i class="fa-brands fa-microsoft skill-icon" style="color:var(--accent);"></i>
                 <h3>ASP.NET Core</h3>
             </div>
-            <div class="glass-card" style="text-align:center;">
-                <i class="fa-solid fa-c" style="font-size:3.5rem; color:#7c3aed; margin-bottom:1rem;"></i>
+            <div class="glass-card skill-card">
+                <i class="fa-solid fa-c skill-icon" style="color:#7c3aed;"></i>
                 <h3>C#</h3>
             </div>
-            <div class="glass-card" style="text-align:center;">
-                <i class="fa-solid fa-database" style="font-size:3.5rem; color:#10b981; margin-bottom:1rem;"></i>
+            <div class="glass-card skill-card">
+                <i class="fa-solid fa-database skill-icon" style="color:#10b981;"></i>
                 <h3>SQL Server / EF Core</h3>
             </div>
-            <div class="glass-card" style="text-align:center;">
-                <i class="fa-solid fa-cloud" style="font-size:3.5rem; color:var(--accent); margin-bottom:1rem;"></i>
-                <h3>Azure</h3>
+            <div class="glass-card skill-card">
+                <i class="fa-solid fa-react skill-icon" style="color:var(--accent);"></i>
+                <h3>React</h3>
             </div>
-            <div class="glass-card" style="text-align:center;">
-                <i class="fa-brands fa-js" style="font-size:3.5rem; color:#f59e0b; margin-bottom:1rem;"></i>
+            <div class="glass-card skill-card">
+                <i class="fa-brands fa-js skill-icon" style="color:#f59e0b;"></i>
                 <h3>JavaScript / TypeScript</h3>
             </div>
-            <div class="glass-card" style="text-align:center;">
-                <i class="fa-solid fa-code" style="font-size:3.5rem; color:#8b5cf6; margin-bottom:1rem;"></i>
-                <h3>Blazor</h3>
+            <div class="glass-card skill-card">
+                <i class="fa-solid fa-code skill-icon" style="color:#8b5cf6;"></i>
+                <h3>Frontend</h3>
             </div>
         </div>
     </div>
@@ -142,32 +298,32 @@
 
 <section class="section" id="projects">
     <div class="container">
-        <h2 style="font-size:2.8rem; text-align:center; margin-bottom:3rem;">Featured Work</h2>
+        <h2 class="section-title">Featured Work</h2>
         <div class="grid-3">
             <div class="glass-card">
                 <h3>E-Commerce Platform</h3>
                 <p>Full-featured online store with payment integration, admin panel and responsive design.</p>
-                <div style="margin-top:1.2rem; display:flex; gap:0.6rem; flex-wrap:wrap;">
-                    <span style="padding:0.4rem 0.9rem; background:rgba(37,99,235,0.1); border-radius:999px; font-size:0.9rem;">ASP.NET Core</span>
-                    <span style="padding:0.4rem 0.9rem; background:rgba(139,92,246,0.1); border-radius:999px; font-size:0.9rem;">EF Core</span>
+                <div class="project-tags">
+                    <span class="tag">ASP.NET Core</span>
+                    <span class="tag">EF Core</span>
                 </div>
             </div>
-            <!-- Add 2–3 more project cards here -->
+            <!-- Add more project cards here -->
         </div>
     </div>
 </section>
 
 <section class="section" id="contact" style="background:var(--card);">
     <div class="container" style="max-width:700px;">
-        <h2 style="font-size:2.8rem; text-align:center; margin-bottom:3rem;">Get in Touch</h2>
-        <form action="https://formspree.io/f/your-id" method="POST" style="display:grid; gap:1.4rem;">
-            <input type="text" name="name" placeholder="Your Name" required style="padding:1rem; border:1px solid var(--border); border-radius:10px; background:var(--glass);">
-            <input type="email" name="email" placeholder="Your Email" required style="padding:1rem; border:1px solid var(--border); border-radius:10px; background:var(--glass);">
-            <textarea name="message" rows="6" placeholder="Your Message" required style="padding:1rem; border:1px solid var(--border); border-radius:10px; background:var(--glass); resize:vertical;"></textarea>
-            <button type="submit" class="btn" style="padding:1.1rem;">Send Message</button>
+        <h2 class="section-title">Get in Touch</h2>
+        <form action="#" method="POST" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required class="form-input">
+            <input type="email" name="email" placeholder="Your Email" required class="form-input">
+            <textarea name="message" rows="6" placeholder="Your Message" required class="form-textarea"></textarea>
+            <button type="submit" class="btn-primary" style="padding:1.1rem 2rem; font-size:1.1rem;">Send Message</button>
         </form>
         <p style="text-align:center; margin-top:2rem; color:var(--muted);">
-            or email me directly: ashish@example.com
+            or email me directly: ashish.ti1098@gmail.com
         </p>
     </div>
 </section>
